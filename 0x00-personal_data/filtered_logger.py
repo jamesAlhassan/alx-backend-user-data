@@ -20,6 +20,7 @@ def filter_datum(fields: List[str], redaction: str,
                          f'{f}={redaction}{separator}', message)
     return message
 
+
 def get_logger() -> logging.Logger:
     " Returns a Logger Object "
     logger = logging.getLogger("user_data")
@@ -31,6 +32,7 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
 
     return logger
+
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     " Returns a connector to a MySQL database "
