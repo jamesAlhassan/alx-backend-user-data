@@ -53,6 +53,7 @@ class Auth:
 
         return False
 
+
 def _generate_uuid() -> str:
     """Returns a string representation of a new UUID"""
     UUID = uuid4()
