@@ -31,3 +31,20 @@ def log_in_wrong_password(email: str, password: str) -> None:
     response = requests.post(f'{BASE_URL}/sessions', data=data)
 
     assert response.status_code == 401
+
+def log_in(email: str, password: str) -> str:
+    """ Test for validating succesful log in """
+    data = {
+        "email": email,
+        "password": password
+    }
+    response = requests.post(f'{BASE_URL}/sessions', data=data)
+
+    msg = {"email": email, "message": "logged in"}
+
+    assert response.status_code == 200
+    assert response.json() == msg
+
+    session_id = response.cookies.get("session_id")
+
+    return session_id
