@@ -22,6 +22,7 @@ def register_user(email: str, password: str) -> None:
     assert response.status_code == 200
     assert response.json() == msg
 
+
 def log_in_wrong_password(email: str, password: str) -> None:
     """ Test for validating log in with wrong password """
     data = {
@@ -31,6 +32,7 @@ def log_in_wrong_password(email: str, password: str) -> None:
     response = requests.post(f'{BASE_URL}/sessions', data=data)
 
     assert response.status_code == 401
+
 
 def log_in(email: str, password: str) -> str:
     """ Test for validating succesful log in """
@@ -49,6 +51,7 @@ def log_in(email: str, password: str) -> str:
 
     return session_id
 
+
 def profile_unlogged() -> None:
     """ Test for validating profile request without log in """
     cookies = {
@@ -57,6 +60,7 @@ def profile_unlogged() -> None:
     response = requests.get(f'{BASE_URL}/profile', cookies=cookies)
 
     assert response.status_code == 403
+
 
 def profile_logged(session_id: str) -> None:
     """ Test for validating profile request logged in """
@@ -69,6 +73,7 @@ def profile_logged(session_id: str) -> None:
 
     assert response.status_code == 200
     assert response.json() == msg
+
 
 def log_out(session_id: str) -> None:
     """ Test for validating log out endpoint """
@@ -99,6 +104,7 @@ def reset_password_token(email: str) -> str:
     assert response.json() == msg
 
     return reset_token
+
 
 def update_password(email: str, reset_token: str, new_password: str) -> None:
     """ Test for validating password reset (update) """
