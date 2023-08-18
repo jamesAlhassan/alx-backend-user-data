@@ -81,3 +81,21 @@ def log_out(session_id: str) -> None:
 
     assert response.status_code == 200
     assert response.json() == msg
+
+
+def reset_password_token(email: str) -> str:
+    """ Test for validating password reset token """
+    data = {
+        "email": email
+    }
+    response = requests.post(f'{BASE_URL}/reset_password', data=data)
+
+    assert response.status_code == 200
+
+    reset_token = response.json().get("reset_token")
+
+    msg = {"email": email, "reset_token": reset_token}
+
+    assert response.json() == msg
+
+    return reset_token
