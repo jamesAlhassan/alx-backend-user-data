@@ -57,3 +57,15 @@ def profile_unlogged() -> None:
     response = requests.get(f'{BASE_URL}/profile', cookies=cookies)
 
     assert response.status_code == 403
+
+def profile_logged(session_id: str) -> None:
+    """ Test for validating profile request logged in """
+    cookies = {
+        "session_id": session_id
+    }
+    response = requests.get(f'{BASE_URL}/profile', cookies=cookies)
+
+    msg = {"email": EMAIL}
+
+    assert response.status_code == 200
+    assert response.json() == msg
