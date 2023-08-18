@@ -48,3 +48,12 @@ def log_in(email: str, password: str) -> str:
     session_id = response.cookies.get("session_id")
 
     return session_id
+
+def profile_unlogged() -> None:
+    """ Test for validating profile request without log in """
+    cookies = {
+        "session_id": ""
+    }
+    response = requests.get(f'{BASE_URL}/profile', cookies=cookies)
+
+    assert response.status_code == 403
