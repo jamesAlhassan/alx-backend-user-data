@@ -69,3 +69,15 @@ def profile_logged(session_id: str) -> None:
 
     assert response.status_code == 200
     assert response.json() == msg
+
+def log_out(session_id: str) -> None:
+    """ Test for validating log out endpoint """
+    cookies = {
+        "session_id": session_id
+    }
+    response = requests.delete(f'{BASE_URL}/sessions', cookies=cookies)
+
+    msg = {"message": "Bienvenue"}
+
+    assert response.status_code == 200
+    assert response.json() == msg
